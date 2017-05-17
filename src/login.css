@@ -1,5 +1,5 @@
 .login {
-    padding: 100px 0;
+    padding: 80px 0;
     display: block;
     margin: 0 auto;
     width: 360px;
@@ -9,13 +9,19 @@
     text-align: left;
     display: block;
 }
+.loginText{
+	font-size: 3em;
+	margin-bottom: 20px;
+}
 .baseInput{
     display: block;
     margin: 0 auto;
+	border-radius: 5px;
+	border: 1px solid #c2c2c2;
     height: 1em;
     width: 100%;
     font-size: 16px;
-    padding: 10px 5px 5px;
+    padding: 15px 7px 6px;
     margin-bottom: 0.75em;
 }
 
@@ -49,8 +55,9 @@
 }
 
 .btn-1 {
-	border: 3px solid #fff;
-	color: #fff;
+	border: 3px solid #f0f0f0;
+	background-color: #08192a;
+	color: #fffffe;
 }
 
 /* Button 1b */
@@ -59,12 +66,12 @@
 	height: 0;
 	top: 0;
 	left: 0;
-	background: #fff;
+	background: #f0f0f0;
 }
 
 .btn-1b:hover,
 .btn-1b:active {
-	color: #0e83cd;
+	color: #b6b6b6;
 }
 
 .btn-1b:hover:after,
