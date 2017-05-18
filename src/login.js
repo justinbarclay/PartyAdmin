@@ -9,15 +9,22 @@ class Login extends Component {
     super(props);
 
     this.login = this.login.bind(this);
+    this.submit = this.submit.bind(this);
+  }
+  submit(e){
+    if(e.key == 'Enter'){
+      this.login();
+    }
   }
   login() {
+    let self = this;
     const email = this.email.value;
     const password = this.password.value;
-    this.props.callback(true);
-    console.log(JSON.stringify({auth:{
-         email: email,
-        password: password
-      }}));
+
+    if (email == "" || password == ""){
+      alert('Email or password can not be blank');
+      return;
+    }
     
     fetch('//www.partyserver.dev/user_token', {
       headers: new Headers({
@@ -32,13 +39,18 @@ class Login extends Component {
       }})
     })
     .then(checkStatus)
+    .then(parseJSON)
     .then(function(data) {
+      console.log(data);
       if(data.jwt){
         window.localStorage.setItem('email', email);
-        window.localStorage.setItemt('jwt', data.jwt);
-      }      
+        window.localStorage.setItem('jwt', data.jwt);
+        self.props.callback(true);
+      }
+      return;
     })
     .catch(function(error) {
+      alert("username and password do not match");
       console.log('request failed', error);
     })
   }
@@ -48,7 +60,7 @@ class Login extends Component {
       <div className="login">
         <div className="loginText"> Login {console.log(this)} </div> 
         <input className="baseInput" placeholder="Email" ref={(email) => { this.email = email; }}/>
-        <input type="password" className="baseInput" placeholder="Password" ref={(password) => { this.password = password; }}/>
+        <input type="password" className="baseInput" placeholder="Password" onKeyPress={this.submit} ref={(password) => { this.password = password; }}/>
         <button className="btn btn-1 btn-1b"onClick={self.login}> Submit </button> 
       </div>
     );

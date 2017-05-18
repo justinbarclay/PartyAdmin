@@ -10,22 +10,23 @@ class App extends Component {
   constructor(){
     super();
     this.state = {loggedIn: false};
+    this.login = this.login.bind(this);
+  }
+  login(success){
+    this.setState({loggedIn: success})  
   }
   componentWillMount(){
   /*
   *
   *  This is bad form and the routes need to be moved off to their own config files.
+  *  The question then becomes how do we update loggedIn? Do we need a data store?
   *
   */
     const loggedOut = (
         <Router>
           <div className="bodyContainer">
             <Route exact path="/" render={()=> (
-                <Login callback={(success)=> {
-                  console.log(success); 
-                  this.setState({loggedIn: success})
-                  }
-                }/>
+                <Login callback={this.login}/>
             )
             }/>
           </div>
@@ -64,7 +65,6 @@ class App extends Component {
           </div>
         </Router>
         );
-      console.log(nextState)
       this.router = nextState.loggedIn? loggedIn : loggedOut;
   }
   render() {
