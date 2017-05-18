@@ -72,6 +72,7 @@
 .btn-1b:hover,
 .btn-1b:active {
 	color: #b6b6b6;
+	background-color: black;
 }
 
 .btn-1b:hover:after,
