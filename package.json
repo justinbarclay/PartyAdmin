@@ -1,17 +1,26 @@
 {
   "name": "partyadmin",
   "version": "0.1.0",
+  "homepage": ".",
   "private": true,
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-sass": "^2.3.2",
+    "react-scripts": "0.9.5"
+  },
   "dependencies": {
-    "fetch": "^1.1.0",
+    "chart.js": "2.5.0",
     "react": "^15.5.4",
-    "react-dom": "^15.5.4",
+    "react-addons-css-transition-group": "15.5.2",
+    "react-addons-transition-group": "15.5.2",
+    "react-breadcrumbs": "1.6.6",
+    "react-chartjs-2": "2.0.5",
+    "react-dom": "15.5.4",
     "react-router-dom": "^4.1.1",
+    "reactstrap": "4.5.0",
     "superagent": "^3.5.2",
     "whatwg-fetch": "^2.0.3"
-  },
-  "devDependencies": {
-    "react-scripts": "0.9.5"
   },
   "scripts": {
     "start": "react-scripts start",
