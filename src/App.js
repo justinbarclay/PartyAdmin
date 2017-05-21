@@ -11,8 +11,7 @@ class App extends Component {
         }
     }
     render(){
-        let thing = this.app
-        return (thing);
+        return (this.app);
     }
 }
 

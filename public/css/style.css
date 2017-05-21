@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /**
  * CoreUI - Open Source Bootstrap Admin Template
  * @version v1.0.0-alpha.5
@@ -7553,7 +7554,7 @@ base-chart.chart {
     background-image: url("../img/logo.png");
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: 70px auto;
+    background-size: 45px auto;
     border-bottom: 1px solid #cfd8dc; }
   .app-header.navbar .navbar-nav {
     flex-direction: row;
