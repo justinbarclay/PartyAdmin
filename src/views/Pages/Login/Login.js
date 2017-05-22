@@ -9,23 +9,23 @@ class Login extends Component {
     this.submit = this.submit.bind(this);
   }
   submit(e){
-    if(e.key == 'Enter'){
+    if(e.key === 'Enter'){
       this.login();
     }
   }
-  login() {
-    let self = this;
+  login(e) {
+
     const email = this.email.value;
     const password = this.password.value;
 
-    if (email == "" || password == ""){
+    if (email.length < 1 || password.length < 1){
       alert('Email or password can not be blank');
       return;
     }
     loginRequest({email: email, password: password}, this.props.login);
+    document.getElementById('login').disabled = true;
   }
   render() {
-    let self = this;
     return (
       <div className="container">
         <div className="row justify-content-center">
@@ -41,11 +41,11 @@ class Login extends Component {
                   </div>
                   <div className="input-group mb-4">
                     <span className="input-group-addon"><i className="icon-lock"></i></span>
-                    <input type="password" className="form-control" placeholder="Password" onKeyPress={self.submit} ref={(password) => { this.password = password; }}/>
+                    <input type="password" className="form-control" placeholder="Password" onKeyPress={this.submit} ref={(password) => { this.password = password; }}/>
                   </div>
                   <div className="row">
                     <div className="col-6">
-                      <button type="button" className="btn btn-primary px-4" onClick={this.login}>Login</button>
+                      <button type="button" className="btn btn-primary px-4" id="login" onClick={this.login}>Login</button>
                     </div>
                     <div className="col-6 text-right">
                       <button type="button" className="btn btn-link px-0">Forgot password?</button>
@@ -96,9 +96,12 @@ function loginRequest(user, callback){
         window.localStorage.setItem('email', user.email);
         window.localStorage.setItem('jwt', data.jwt);
         callback(true);
+      } else {
+        throw new Error("Response missing JWT")
       }
     })
     .catch(function(error) {
+      document.getElementById('login').disabled = false;
       alert("username and password do not match");
       console.log('request failed', error);
     });
