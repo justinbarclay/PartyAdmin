@@ -5,7 +5,6 @@ class Table extends Component {
         let rows = this.props.data.map(function(data, index){
             return (<TableRow data={data} key={index}/>);
         });
-
         return (
             <div>
               <div className="animated fadeIn">
