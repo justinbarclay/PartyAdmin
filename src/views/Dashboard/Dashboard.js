@@ -4,7 +4,7 @@ import Table from '../Table'
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-    this.state = {headers: [], parts: []}
+    this.state = {headers: ["Name", "Count", "Room", "Shelf", "Updated At"], parts: [], keys: ["name", "count", "room", "shelf", "updated_at"]}
   }
   componentWillMount(){
     let token = `Bearer ${window.localStorage.getItem('jwt')}`;
@@ -12,15 +12,13 @@ class Dashboard extends Component {
 
     getParts(token, (data) => {
       const parts = data.parts;
-      console.log("test");
-      const headers = Object.keys(data.parts[0]);
-      self.setState({ parts: parts, headers: headers });
+      self.setState({ parts: parts });
     });
   }
   render() {
     return (
       <div>
-        <Table header={this.state.headers} data={this.state.parts} title={"Part"} />
+        <Table header={this.state.headers} data={this.state.parts} keys={this.state.keys} title={"Part"} />
       </div>  
     );
   }
@@ -51,11 +49,7 @@ function getParts(token, callback){
     })
     .then(checkStatus)
     .then(parseJSON)
-    .then(function(data) {
-      console.log(data);
-      console.log(Object.keys(data.parts[0]));
-      callback(data);
-    })
+    .then(callback)
     .catch(function(error) {
       console.log('request failed', error);
     });
