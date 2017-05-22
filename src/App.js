@@ -3,12 +3,18 @@ import  Full from './containers/Full';
 import  Simple from './containers/Simple';
 
 class App extends Component {
-    constructor(){
-        super();
-        this.app = <Simple/>;
-        if(window.localStorage){
-            this.app = <Full/>;
-        }
+    constructor(props){
+        super(props);
+        this.authStateChange = this.authStateChange.bind(this);
+        this.state  = {"auth": window.localStorage.getItem('jwt') ? true : false};
+        this.app = (this.state.auth ? <Full logout={this.authStateChange}/> : <Simple login={this.authStateChange}/>);
+
+    }
+    componentWillUpdate(nextProps, nextState){
+        this.app = (nextState.auth ? <Full logout={this.authStateChange}/>: <Simple login={this.authStateChange}/>);
+    }
+    authStateChange(change){
+        this.setState({auth: !this.state.auth});
     }
     render(){
         return (this.app);

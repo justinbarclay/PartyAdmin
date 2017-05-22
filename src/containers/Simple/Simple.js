@@ -9,7 +9,7 @@ class Simple extends Component {
       <div className="app flex-row align-items-center">
         <Router>
           <div>
-            <Route exact path='/' component={Login}/>
+            <Route exact path='/' component={() => <Login login={this.props.login}/>} />
             <Route path='/register' component={Register}/>
           </div>
         </Router>

@@ -12,7 +12,7 @@ class Full extends Component {
       <div className="app">
         <Router>
           <div>
-          <Header />
+          <Header logout={this.props.logout} />
           <div className="app-body">
             <Sidebar {...this.props}/>
             <main className="main">

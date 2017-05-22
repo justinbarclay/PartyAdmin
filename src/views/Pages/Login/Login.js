@@ -22,7 +22,7 @@ class Login extends Component {
       alert('Email or password can not be blank');
       return;
     }
-    loginRequest({email: email, password: password}, this.props.callback);
+    loginRequest({email: email, password: password}, this.props.login);
   }
   render() {
     let self = this;
@@ -97,7 +97,6 @@ function loginRequest(user, callback){
         window.localStorage.setItem('jwt', data.jwt);
         callback(true);
       }
-      return;
     })
     .catch(function(error) {
       alert("username and password do not match");
