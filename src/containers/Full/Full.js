@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Header from '../../components/Header/';
 import Dashboard from '../../views/Dashboard/';
+import Part from '../../views/Part/';
+import _404 from '../../views/Pages/Page404/';
 import Sidebar from '../../components/Sidebar/';
 import Aside from '../../components/Aside/';
 import Footer from '../../components/Footer/';
@@ -14,17 +16,21 @@ class Full extends Component {
       <div className="app">
         <Router>
           <div>
-          <Header logout={this.props.logout} />
-          <div className="app-body">
-            <Sidebar {...this.props}/>
-            <main className="main">
-              <div className="container-fluid">
-                <Route exactly path="/" name="Home" component={ Dashboard }/>
-              </div>
-            </main>
-            <Aside />
-          </div>
-          <Footer />
+            <Header logout={this.props.logout} />
+            <div className="app-body">
+              <Sidebar {...this.props} />
+              <main className="main">
+                <div className="container-fluid">
+                  <Switch>
+                    <Route exact path="/" name="Home" component={Dashboard} />
+                    <Route path="/part/:id" name="Part" component={Part} />
+                    <Route path="*" component={_404}/>
+                  </Switch>
+                </div>
+              </main>
+              <Aside />
+            </div>
+            <Footer />
           </div>
         </Router>
       </div>

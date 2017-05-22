@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as moment from 'moment';
-
+import { withRouter } from 'react-router-dom';
 class Table extends Component {
     render() {
         let keys = this.props.keys;
@@ -59,30 +59,40 @@ class TableHeaders extends Component {
 }
 
 class TableRow extends Component {
-    moment = moment;
+    constructor(props, history){
+        super(props);
+        this.loadPart = this.loadPart.bind(this);
+    }
+    loadPart(){
+        console.log(this);
+        this.props.history.push('/part/1');
+    }
     render() {
         let data = this.props.data;
         let row = this.props.keys.map(function (key, index) {
             if (key === "updated_at") {
                 let date = data[key];
                 date = moment.default(date).format('DD-MM-YYYY');
-                return(
-                <td key={index}>
-                    {date}
-                </td>);
+                return (
+                    <td key={index}>
+                        {date}
+                    </td>);
             }
             return (
 
                 <td key={index}>
                     {data[key]}
-                </td>);
+                </td>
+            );
         });
         return (
-            <tr>
-                {row}
-            </tr>
+                <tr onClick={this.loadPart}>
+                    {row}
+                </tr>
         )
     }
 }
+
+TableRow = withRouter(TableRow);
 
 export default Table;
