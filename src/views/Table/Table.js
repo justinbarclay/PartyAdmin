@@ -27,6 +27,7 @@ class Table extends Component {
                             <div className="card">
                                 <div className="card-header">
                                     <i className="fa fa-align-justify"></i> {this.props.title}
+                                    <button className="btn btn-sm btn-primary float-right" onClick={this.props.newUnit}>Add</button>
                                 </div>
                                 <div className="card-block">
                                     <table className="table table-striped table-inverse table-hover">
@@ -59,11 +60,11 @@ class TableHeaders extends Component {
 }
 
 class TableRow extends Component {
-    constructor(props, history){
+    constructor(props, history) {
         super(props);
         this.loadPart = this.loadPart.bind(this);
     }
-    loadPart(){
+    loadPart() {
         console.log(this);
         this.props.history.push('/part/1');
     }
@@ -86,9 +87,9 @@ class TableRow extends Component {
             );
         });
         return (
-                <tr onClick={this.loadPart}>
-                    {row}
-                </tr>
+            <tr onClick={this.loadPart}>
+                {row}
+            </tr>
         )
     }
 }
