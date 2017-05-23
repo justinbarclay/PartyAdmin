@@ -4,7 +4,7 @@ import Table from '../Table'
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-    this.state = {headers: ["Name", "Count", "Room", "Shelf", "Updated At"], parts: [], keys: ["name", "count", "room", "shelf", "updated_at"]}
+    this.state = {headers: ["Name", "Count", "Room", "Shelf", "Updated"], parts: [], keys: ["name", "count", "room", "shelf", "updated_at"]}
   }
   componentWillMount(){
     let token = `Bearer ${window.localStorage.getItem('jwt')}`;

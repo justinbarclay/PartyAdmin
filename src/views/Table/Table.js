@@ -72,7 +72,7 @@ class TableRow extends Component {
         let row = this.props.keys.map(function (key, index) {
             if (key === "updated_at") {
                 let date = data[key];
-                date = moment.default(date).format('DD-MM-YYYY');
+                date = moment.default(date).format('DD/MM/YYYY');
                 return (
                     <td key={index}>
                         {date}
