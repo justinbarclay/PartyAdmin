@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import UnitContainer from './UnitContainer';
+import partAction from '../../actions/parts'
 
-class Part extends Component {
+class NewPart extends Component {
     constructor(props) {
         super(props);
         this.state = { units: [] }
@@ -30,13 +31,12 @@ class Part extends Component {
         this.setState({ units: newUnits });
     }
     savePart() {
-        console.log(this.state.units);
-        let name = document.getElementById('inputName');
-        let location = document.getElementById('inputLocation');
-        let shelf = document.getElementById('inputShelf');
-        let count = document.getElementById('inputCount');
-        let value = document.getElementById('inputValue');
-        let barcode = document.getElementById('inputBarcode');
+        let name = document.getElementById('inputName').value;
+        let location = document.getElementById('inputLocation').value;
+        let shelf = document.getElementById('inputShelf').value;
+        let count = document.getElementById('inputCount').value;
+        let value = document.getElementById('inputValue').value;
+        let barcode = document.getElementById('inputBarcode').value;
         
         let part = {
             name: name,
@@ -44,12 +44,13 @@ class Part extends Component {
             shelf: shelf,
             count: count,
             value: value,
+            units: this.state.units,
             barcode: barcode
         }
-
-        newPart(window.localStorage.getItem('jwt'), part, (data)=>{
-            console.log(data);
-        })
+        partAction().save('parts', part)
+        .catch((thing)=>{
+            console.log(thing);
+        });
 
     }
     render() {
@@ -101,38 +102,4 @@ class Part extends Component {
     }
 }
 
-function checkStatus(response) {
-  if (response.status >= 200 && response.status < 300) {
-    return response
-  } else {
-    var error = new Error(response.statusText)
-    error.response = response
-    throw error
-  }
-}
-
-function parseJSON(response) {
-  return response.json()
-}
-
-function newPart(token, part, callback){
-    fetch('//www.partyserver.dev/api/parts', {
-      headers: new Headers({
-        'Authorization': token,
-		    'Content-Type': 'application/json',
-        'Accept': 'application/json',
-	    }),
-      method: 'POST',
-      mode: 'cors',
-      body: {
-          part: part
-      }
-    })
-    .then(checkStatus)
-    .then(parseJSON)
-    .then(callback)
-    .catch(function(error) {
-      console.log('request failed', error);
-    });
-}
-export default Part;
+export default NewPart;

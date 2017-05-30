@@ -2,5 +2,5 @@
   "name": "Part",
   "version": "0.0.0",
   "private": true,
-  "main": "./Part.js"
+  "main": "./NewPart.js"
 }

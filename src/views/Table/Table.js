@@ -5,7 +5,7 @@ class Table extends Component {
     render() {
         let keys = this.props.keys;
         let rows = this.props.data.map(function (data, index) {
-            return (<TableRow data={data} key={index} keys={keys} />);
+          return (<TableRow data={data} key={index} keys={keys} />);
         });
         return (
             <div>
@@ -42,7 +42,7 @@ class Table extends Component {
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }
 
@@ -55,7 +55,7 @@ class TableHeaders extends Component {
             <tr>
                 {headers}
             </tr>
-        )
+        );
     }
 }
 
@@ -90,7 +90,7 @@ class TableRow extends Component {
             <tr onClick={this.loadPart}>
                 {row}
             </tr>
-        )
+        );
     }
 }
 
