@@ -65,8 +65,7 @@ class TableRow extends Component {
         this.loadPart = this.loadPart.bind(this);
     }
     loadPart() {
-        console.log(this);
-        this.props.history.push('/part/1');
+        this.props.history.push(`/parts/${this.props.data.id}`);
     }
     render() {
         let data = this.props.data;

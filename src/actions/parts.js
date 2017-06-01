@@ -14,19 +14,22 @@ function parseJSON(response) {
 let Part = function () {
     let baseRoute = '//www.partyserver.dev/api/'
     return {
-        save: (path, data) => {
-            let token = window.localStorage.getItem('jwt');
+        save: (data) => {
+            const token = window.localStorage.getItem('jwt');
             let units = []
-            data.units.forEach(function(element) {
-             units.push({unit_attributes: {name: element}})
+            data.units.forEach(function (element) {
+                units.push({
+                    unit_attributes: {
+                        name: element
+                    }
+                })
             }, this);
-            console.log(units);
-            const fullpath = baseRoute + path;
+            const fullpath = baseRoute + 'parts/';
             let part = {
                 name: data.name,
                 count: data.count,
                 room: data.location,
-                shelf: data.shelf, 
+                shelf: data.shelf,
                 value: data.value,
                 barcode: data.bardcode,
                 unit_parts_attributes: units
@@ -39,7 +42,43 @@ let Part = function () {
                     }),
                     method: 'POST',
                     mode: 'cors',
-                    body: JSON.stringify({part:part})
+                    body: JSON.stringify({
+                        part: part
+                    })
+                })
+                .then(checkStatus)
+                .then(parseJSON)
+        },
+        get: (id) => {
+            const fullpath = baseRoute + `parts/${id}`
+            const token = window.localStorage.getItem('jwt');
+            return fetch(fullpath, {
+                    headers: new Headers({
+                        'Authorization': token,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    }),
+                    method: 'GET',
+                    mode: 'cors',
+                })
+                .then(checkStatus)
+                .then(parseJSON)
+        },
+        update: (part) => {
+            const fullpath = baseRoute + `parts/${part.id}`
+            const token = window.localStorage.getItem('jwt');
+        },
+        index: () => {
+            const path = baseRoute + 'parts';
+            const token = window.localStorage.getItem('jwt');
+            return fetch(path, {
+                    headers: new Headers({
+                        'Authorization': token,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    }),
+                    method: 'GET',
+                    mode: 'cors',
                 })
                 .then(checkStatus)
                 .then(parseJSON)

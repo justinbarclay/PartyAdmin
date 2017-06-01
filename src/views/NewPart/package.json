@@ -1,5 +1,5 @@
 {
-  "name": "Part",
+  "name": "NewPart",
   "version": "0.0.0",
   "private": true,
   "main": "./NewPart.js"

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import UnitContainer from './UnitContainer';
-import partAction from '../../actions/parts'
+import partAction from '../../actions/parts';
 
 class NewPart extends Component {
     constructor(props) {
@@ -47,7 +47,7 @@ class NewPart extends Component {
             units: this.state.units,
             barcode: barcode
         }
-        partAction().save('parts', part)
+        partAction().save(part)
         .catch((thing)=>{
             console.log(thing);
         });
