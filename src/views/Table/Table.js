@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as moment from 'moment';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 class Table extends Component {
     render() {
         let keys = this.props.keys;
@@ -27,7 +27,7 @@ class Table extends Component {
                             <div className="card">
                                 <div className="card-header">
                                     <i className="fa fa-align-justify"></i> {this.props.title}
-                                    <button className="btn btn-sm btn-primary float-right" onClick={this.props.newUnit}>Add</button>
+                                    <Link to="/parts/new" className="btn btn-sm btn-primary float-right">Add</Link>
                                 </div>
                                 <div className="card-block">
                                     <table className="table table-striped table-inverse table-hover">
