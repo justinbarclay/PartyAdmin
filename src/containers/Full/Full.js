@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Header from '../../components/Header/';
 import Dashboard from '../../views/Dashboard/';
+import EditPart from '../../views/EditPart/';
 import NewPart from '../../views/NewPart/';
 import Part from '../../views/Part/';
 import _404 from '../../views/Pages/Page404/';
@@ -24,8 +25,9 @@ class Full extends Component {
                 <div className="container-fluid">
                   <Switch>
                     <Route exact path="/" name="Home" component={Dashboard} />
-                    <Route path="/parts/:id" name="Part" component={Part} />
+                    <Route path="/parts/:id/edit" name="EditPart" component={EditPart} />
                     <Route path="/parts/new" name="NewPart" component={NewPart} />
+                    <Route path="/parts/:id" name="Part" component={Part} />
                     <Route path="*" component={_404} />
                   </Switch>
                 </div>
