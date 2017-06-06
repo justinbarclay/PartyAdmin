@@ -1,29 +1,19 @@
 import React, { Component } from 'react';
 import * as moment from 'moment';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 class Table extends Component {
     render() {
+        let handleClick = this.props.handleClick;
         let keys = this.props.keys;
         let rows = this.props.data.map(function (data, index) {
-          return (<TableRow data={data} key={index} keys={keys} />);
+            return (<TableRow data={data} key={index} keys={keys} handleClick={handleClick}/>);
         });
         return (
             <div>
+                <SearchBar/>
                 <div className="animated fadeIn">
                     <div className="row">
-                        <div className="col-lg-11 col-sm-11">
-                            <div className="input-group">
-                                <input type="text" className="form-control" placeholder="Search for..." aria-label="Search for..." />
-                                <span className="input-group-btn">
-                                    <button className="btn btn-secondary" type="button">Go!</button>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="animated fadeIn">
-                    <div className="row">
-                        <div className="col-lg-11 col-sm-11">
+                        <div className="col-sm-11">
                             <div className="card">
                                 <div className="card-header">
                                     <i className="fa fa-align-justify"></i> {this.props.title}
@@ -59,13 +49,31 @@ class TableHeaders extends Component {
     }
 }
 
+class SearchBar extends Component {
+    render() {
+        return (
+            <div className="animated fadeIn">
+                <div className="row">
+                    <div className="col-sm-11">
+                        <div className="input-group">
+                            <input type="text" className="form-control" placeholder="Search for..." aria-label="Search for..." />
+                            <span className="input-group-btn">
+                                <button className="btn btn-secondary" type="button">Go!</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+}
 class TableRow extends Component {
     constructor(props, history) {
         super(props);
         this.loadPart = this.loadPart.bind(this);
     }
     loadPart() {
-        this.props.history.push(`/parts/${this.props.data.id}`);
+        this.props.handleClick(this.props.data.id);
     }
     render() {
         let data = this.props.data;
@@ -92,7 +100,5 @@ class TableRow extends Component {
         );
     }
 }
-
-TableRow = withRouter(TableRow);
 
 export default Table;
