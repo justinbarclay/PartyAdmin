@@ -7,6 +7,7 @@ import NewPart from '../../views/NewPart/';
 import Part from '../../views/Part/';
 import Users from '../../views/Users/';
 import User from '../../views/User/';
+import SignUp from '../../views/SignUp/';
 import NewUser from '../../views/NewUser/';
 import _404 from '../../views/Pages/Page404/';
 import Sidebar from '../../components/Sidebar/';
@@ -33,9 +34,11 @@ class Full extends Component {
                     <Route exact path="/parts/:id" name="Part" component={Part} />
                     <Route exact path="/parts/:id/edit" name="EditPart" component={EditPart} />
                     
-                    <Route exact path="/users" naem="Users" component={Users} />
-                    <Route exact path="/users/new" naem="User" component={NewUser} />
-                    <Route exact path="/users/:id" naem="User" component={User} />
+                    <Route exact path="/users" name="Users" component={Users} />
+                    <Route exact path="/users/new" name="User" component={NewUser} />
+                    <Route exact path="/users/:id" name="User" component={User} />
+
+                    <Route path="/signup/:token" name="Sign Up" component={SignUp} />
                     
                     <Route path="*" component={_404} />
                   </Switch>
