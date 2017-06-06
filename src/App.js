@@ -11,13 +11,13 @@ class App extends Component {
 
     }
     componentWillUpdate(nextProps, nextState){
+        //This is a really hacky way to
         this.app = (nextState.auth ? <Full logout={this.authStateChange}/>: <Simple login={this.authStateChange}/>);
     }
     authStateChange(change){
-        this.setState({auth: !this.state.auth});
+        this.setState({auth: window.localStorage.getItem('jwt') ? true : false});
     }
     render(){
-      let thing = "hello";
         return (this.app);
     }
 }
