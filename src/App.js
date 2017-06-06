@@ -14,7 +14,7 @@ class App extends Component {
         //This is a really hacky way to
         this.app = (nextState.auth ? <Full logout={this.authStateChange}/>: <Simple login={this.authStateChange}/>);
     }
-    authStateChange(change){
+    authStateChange(){
         this.setState({auth: window.localStorage.getItem('jwt') ? true : false});
     }
     render(){
