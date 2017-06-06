@@ -12,7 +12,7 @@ function parseJSON(response) {
     return response.json()
 }
 let Part = function () {
-    let baseRoute = '//www.partyserver.dev/api/'
+    let baseRoute = '//www.partyserver.dev/api/parts/'
     return {
         save: (data) => {
             const token = window.localStorage.getItem('jwt');
@@ -24,7 +24,7 @@ let Part = function () {
                     }
                 })
             }, this);
-            const fullpath = baseRoute + 'parts/';
+
             let part = {
                 name: data.name,
                 count: data.count,
@@ -34,7 +34,7 @@ let Part = function () {
                 barcode: data.bardcode,
                 unit_parts_attributes: units
             }
-            return fetch(fullpath, {
+            return fetch(baseRoute, {
                     headers: new Headers({
                         'Authorization': token,
                         'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ let Part = function () {
                 .then(parseJSON)
         },
         get: (id) => {
-            const fullpath = baseRoute + `parts/${id}`
+            const fullpath = baseRoute + `${id}`
             const token = window.localStorage.getItem('jwt');
             return fetch(fullpath, {
                     headers: new Headers({
@@ -66,7 +66,7 @@ let Part = function () {
         },
         update: (part) => {
             console.log(part)
-            const fullpath = baseRoute + `parts/${part.id}`
+            const fullpath = baseRoute + `${part.id}`
             const token = window.localStorage.getItem('jwt');
             return fetch(fullpath, {
                     headers: new Headers({
@@ -84,7 +84,7 @@ let Part = function () {
                 .then(parseJSON)
         },
         delete: (id) => {
-            const fullpath = baseRoute + `parts/${id}`
+            const fullpath = baseRoute + `${id}`
             const token = window.localStorage.getItem('jwt');
             return fetch(fullpath, {
                     headers: new Headers({
@@ -99,9 +99,8 @@ let Part = function () {
                 .then(parseJSON)
         },
         index: () => {
-            const path = baseRoute + 'parts';
             const token = window.localStorage.getItem('jwt');
-            return fetch(path, {
+            return fetch(baseRoute, {
                     headers: new Headers({
                         'Authorization': token,
                         'Content-Type': 'application/json',
