@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import adminActions from '../../actions/admin';
-import { Link } from 'react-router-dom';
+import Alert from '../../components/Alert';
+
 class User extends Component {
     constructor(props) {
         super(props);
-        this.state = { user: {} }
+        console.log(this);
+        this.state = {
+            user: {},
+            alertClass: "",
+            messages: []
+        };
+        this.inviteUser = this.inviteUser.bind(this);
     }
     inviteUser() {
         let user = {
@@ -14,14 +21,15 @@ class User extends Component {
         }
         adminActions().invite(user)
             .then((data) => {
-                alert(JSON.stringify(data));
+                this.props.history.push("/users");
             })
             .catch((error) => {
-                console.log(error);
+                // This is a hacky way of being able to resolve an error while still reading it's body
+                Promise.resolve(error.json()).then((data) => { console.log(data.errors); this.setState({ messages: data.errors, alertClass: "alert-danger" }) });
+
             });
     }
     componentWillUpdate(nextProps, nextState) {
-        console.log(nextState.part);
         document.getElementById('email').innerText = nextState.user.email;
         document.getElementById('firstName').innerText = nextState.user.first_name;
         document.getElementById('lastName').innerText = nextState.user.last_name;
@@ -30,8 +38,9 @@ class User extends Component {
         return (
             <div className="card">
                 <div className="card-header">
-                    Part
+                    New User
                 </div>
+                <Alert alertClass={this.state.alertClass} messages={this.state.messages} />
                 <div className="container card-block">
                     <div className="form-group row">
                         <label htmlFor="email" className="col-sm-1">Email:</label>
