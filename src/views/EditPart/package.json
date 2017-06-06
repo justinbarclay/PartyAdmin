@@ -1,0 +1,6 @@
+{
+  "name": "EditPart",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./EditPart.js"
+}
