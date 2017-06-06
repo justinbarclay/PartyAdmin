@@ -18,10 +18,10 @@ class Full extends Component {
       <div className="app">
         <Router>
           <div>
-            <Header logout={this.props.logout} />
+            <Header logout={this.props.logout}/>
             <div className="app-body">
               <Sidebar {...this.props} />
-              <main className="main">
+              <main className="main pt-3">
                 <div className="container-fluid">
                   <Switch>
                     <Route exact path="/" name="Home" component={Dashboard} />
