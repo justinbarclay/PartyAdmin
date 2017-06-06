@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 class Sidebar extends Component {
 
@@ -18,12 +18,12 @@ class Sidebar extends Component {
 
   render() {
     return (
-
       <div className="sidebar">
         <nav className="sidebar-nav">
           <ul className="nav">
             <li className="nav-item">
-              <Link to='/' className="nav-link active"><i className="icon-speedometer"></i> Parts <span className="badge badge-info">NEW</span></Link>
+              <NavLink exact to='/' className="nav-link" activeClassName="active"><i className="icon-speedometer"></i> Parts <span className="badge badge-info">NEW</span></NavLink>
+              <NavLink to='/users' className="nav-link" activeClassName="active"><i className="icon-speedometer"></i> Users <span className="badge badge-info">NEW</span></NavLink>
             </li>
           </ul>
         </nav>
