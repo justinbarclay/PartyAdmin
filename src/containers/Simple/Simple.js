@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import Login from '../../views/Pages/Login';
-import Register from '../../views/Pages/Register';
+import SignUp from '../../views/SignUp';
 
 class Simple extends Component {
   render() {
@@ -10,7 +10,7 @@ class Simple extends Component {
         <Router>
           <div>
             <Route exact path='/' component={() => <Login login={this.props.login}/>} />
-            <Route path='/register' component={Register}/>
+            <Route path='/signup/:token' component={SignUp}/>
           </div>
         </Router>
       </div>
