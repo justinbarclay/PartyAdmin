@@ -17,7 +17,7 @@ class Table extends Component {
                             <div className="card">
                                 <div className="card-header">
                                     <i className="fa fa-align-justify"></i> {this.props.title}
-                                    <Link to="/parts/new" className="btn btn-sm btn-primary float-right">Add</Link>
+                                    <Link to={`${this.props.baseRoute}/new`} className="btn btn-sm btn-primary float-right">Add</Link>
                                 </div>
                                 <div className="card-block">
                                     <table className="table table-striped table-inverse table-hover">

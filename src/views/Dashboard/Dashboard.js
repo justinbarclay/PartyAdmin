@@ -22,7 +22,7 @@ class Dashboard extends Component {
   render() {
     return (
       <div>
-        <Table header={this.state.headers} data={this.state.parts} keys={this.state.keys} title={"Part"} handleClick={this.rowOnClick}/>
+        <Table header={this.state.headers} data={this.state.parts} keys={this.state.keys} title={"Part"} handleClick={this.rowOnClick} baseRoute={"parts"}/>
       </div>  
     );
   }

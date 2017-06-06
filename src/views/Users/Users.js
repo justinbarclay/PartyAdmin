@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Table from '../Table';
-import userAction from '../../actions/users';
+import adminAction from '../../actions/admin';
 
 class Users extends Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class Users extends Component {
   componentWillMount(){
     let self = this;
 
-    getParts((data) => {
+    getUsers((data) => {
       const users = data.users;
       self.setState({ users: users });
     });
@@ -22,13 +22,13 @@ class Users extends Component {
   render() {
     return (
       <div>
-        <Table header={this.state.headers} data={this.state.users} keys={this.state.keys} title={"Users"} handleClick={this.rowOnClick} />
+        <Table header={this.state.headers} data={this.state.users} keys={this.state.keys} title={"Users"} handleClick={this.rowOnClick} baseRoute={"users"}/>
       </div>  
     );
   }
 }
-function getParts(callback){
-    userAction()
+function getUsers(callback){
+    adminAction()
     .index()
     .then(callback)
     .catch((error) =>{

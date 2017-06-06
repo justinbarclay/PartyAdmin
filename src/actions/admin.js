@@ -11,29 +11,14 @@ function checkStatus(response) {
 function parseJSON(response) {
     return response.json()
 }
-let Users = function () {
-    let baseRoute = '//www.partyserver.dev/api/users/'
+let Admin = function () {
+    let baseRoute = '//www.partyserver.dev/api/admin/';
+    //let baseRoute = '//localhost:35012/api/admin/';
     return {
-        save: (data) => {
+        invite: (user) => {
             const token = window.localStorage.getItem('jwt');
-            let units = []
-            data.units.forEach(function (element) {
-                units.push({
-                    unit_attributes: {
-                        name: element
-                    }
-                })
-            }, this);
-            let part = {
-                name: data.name,
-                count: data.count,
-                room: data.location,
-                shelf: data.shelf,
-                value: data.value,
-                barcode: data.bardcode,
-                unit_parts_attributes: units
-            }
-            return fetch(baseRoute, {
+            const path = baseRoute + "invite"
+            return fetch(path, {
                     headers: new Headers({
                         'Authorization': token,
                         'Content-Type': 'application/json',
@@ -42,14 +27,14 @@ let Users = function () {
                     method: 'POST',
                     mode: 'cors',
                     body: JSON.stringify({
-                        part: part
+                        user: user
                     })
                 })
                 .then(checkStatus)
                 .then(parseJSON)
         },
         get: (id) => {
-            const fullpath = baseRoute + `${id}`
+            const fullpath = baseRoute + `users/${id}`
             const token = window.localStorage.getItem('jwt');
             return fetch(fullpath, {
                     headers: new Headers({
@@ -98,7 +83,7 @@ let Users = function () {
                 .then(parseJSON)
         },
         index: () => {
-            const path = baseRoute;
+            const path = baseRoute + 'users/';
             const token = window.localStorage.getItem('jwt');
             return fetch(path, {
                     headers: new Headers({
@@ -115,4 +100,4 @@ let Users = function () {
     }
 }
 
-export default Users;
+export default Admin;
