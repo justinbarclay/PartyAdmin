@@ -5,6 +5,7 @@ import partAction from '../../actions/parts';
 class Dashboard extends Component {
   constructor(props) {
     super(props);
+    this.rowOnClick = this.rowOnClick.bind(this);
     this.state = {headers: ["Name", "Count", "Room", "Shelf", "Updated"], parts: [], keys: ["name", "count", "room", "shelf", "updated_at"]}
   }
   componentWillMount(){
@@ -15,10 +16,13 @@ class Dashboard extends Component {
       self.setState({ parts: parts });
     });
   }
+  rowOnClick(id){
+    this.props.history.push(`/parts/${id}`);
+  }
   render() {
     return (
       <div>
-        <Table header={this.state.headers} data={this.state.parts} keys={this.state.keys} title={"Part"} />
+        <Table header={this.state.headers} data={this.state.parts} keys={this.state.keys} title={"Part"} handleClick={this.rowOnClick}/>
       </div>  
     );
   }

@@ -1,0 +1,6 @@
+{
+  "name": "PartsTable",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./PartsTable.js"
+}
