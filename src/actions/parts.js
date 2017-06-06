@@ -65,8 +65,38 @@ let Part = function () {
                 .then(parseJSON)
         },
         update: (part) => {
+            console.log(part)
             const fullpath = baseRoute + `parts/${part.id}`
             const token = window.localStorage.getItem('jwt');
+            return fetch(fullpath, {
+                    headers: new Headers({
+                        'Authorization': token,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    }),
+                    method: 'put',
+                    mode: 'cors',
+                    body: JSON.stringify({
+                        part: part
+                    })
+                })
+                .then(checkStatus)
+                .then(parseJSON)
+        },
+        delete: (id) => {
+            const fullpath = baseRoute + `parts/${id}`
+            const token = window.localStorage.getItem('jwt');
+            return fetch(fullpath, {
+                    headers: new Headers({
+                        'Authorization': token,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    }),
+                    method: 'delete',
+                    mode: 'cors',
+                })
+                .then(checkStatus)
+                .then(parseJSON)
         },
         index: () => {
             const path = baseRoute + 'parts';
