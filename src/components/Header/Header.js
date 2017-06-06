@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom'
 
 class Header extends Component {
   constructor(){
@@ -27,7 +28,9 @@ class Header extends Component {
 
   logout(e){
     e.preventDefault();
+
     window.localStorage.clear();
+    this.props.history.push("/");
     this.props.logout(true);
   }
   render() {
@@ -50,4 +53,5 @@ class Header extends Component {
   }
 }
 
-export default Header;
+let header =  withRouter(Header)
+export default header;
