@@ -8,10 +8,10 @@ class App extends Component {
         this.authStateChange = this.authStateChange.bind(this);
         this.state  = {"auth": window.localStorage.getItem('jwt') ? true : false};
         this.app = (this.state.auth ? <Full logout={this.authStateChange}/> : <Simple login={this.authStateChange}/>);
-
     }
     componentWillUpdate(nextProps, nextState){
-        //This is a really hacky way to
+        //This is a really hacky way to choose which component to render
+        // It might be worthwhile to split it out to multiple lines
         this.app = (nextState.auth ? <Full logout={this.authStateChange}/>: <Simple login={this.authStateChange}/>);
     }
     authStateChange(){
