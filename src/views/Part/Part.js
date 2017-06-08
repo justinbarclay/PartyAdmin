@@ -2,10 +2,16 @@ import React, { Component } from 'react'
 import UnitContainer from './UnitContainer';
 import partAction from '../../actions/parts';
 import { Link } from 'react-router-dom'
+import Alert from '../../components/Alert';
+
 class Part extends Component {
     constructor(props) {
         super(props);
-        this.state = { part: {} }
+        this.state = {
+            part: {},
+            alertClass: "",
+            messages: []
+        }
     }
     componentWillMount() {
         let self = this;
@@ -35,6 +41,7 @@ class Part extends Component {
                 <div className="card-header">
                     Part
                 </div>
+                <Alert alertClass={this.state.alertClass} messages={this.state.messages} />
                 <div className="container card-block">
                     <form>
                         <div className="form-group row">

@@ -25,8 +25,10 @@ class User extends Component {
             })
             .catch((error) => {
                 // This is a hacky way of being able to resolve an error while still reading it's body
-                Promise.resolve(error.json()).then((data) => { console.log(data.errors); this.setState({ messages: data.errors, alertClass: "alert-danger" }) });
-
+                if(error.status === 501){
+                    this.props.history.push("/");   
+                }
+                Promise.resolve(error.json()).then((data) => { this.setState({ messages: data.errors, alertClass: "alert-danger" }) });
             });
     }
     componentWillUpdate(nextProps, nextState) {

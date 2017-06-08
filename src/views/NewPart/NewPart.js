@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
 import UnitContainer from './UnitContainer';
 import partAction from '../../actions/parts';
+import Alert from '../../components/Alert';
 
 class NewPart extends Component {
     constructor(props) {
         super(props);
-        this.state = { units: [] }
+        this.state = {
+            units: [],
+            alertClass: "",
+            messages: []
+        }
 
         this.remove = this.remove.bind(this);
         this.update = this.update.bind(this);
@@ -37,7 +42,7 @@ class NewPart extends Component {
         let count = document.getElementById('inputCount').value;
         let value = document.getElementById('inputValue').value;
         let barcode = document.getElementById('inputBarcode').value;
-        
+
         let part = {
             name: name,
             location: location,
@@ -48,9 +53,15 @@ class NewPart extends Component {
             barcode: barcode
         }
         partAction().save(part)
-        .catch((thing)=>{
-            console.log(thing);
-        });
+            .then((data) => {
+                this.props.history.push("/");
+            })
+            .catch((error) => {
+                if (error.status === 501) {
+                    this.props.history.push("/");
+                }
+                Promise.resolve(error.json()).then((data) => { console.log(data.errors); this.setState({ messages: data.errors, alertClass: "alert-danger" }) });
+            });
 
     }
     render() {
@@ -59,6 +70,7 @@ class NewPart extends Component {
                 <div className="card-header">
                     Part
                 </div>
+                <Alert alertClass={this.state.alertClass} messages={this.state.messages} />
                 <div className="container card-block">
                     <form>
                         <div className="form-group">
