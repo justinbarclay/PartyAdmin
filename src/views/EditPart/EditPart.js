@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import UnitContainer from './UnitContainer';
 import partAction from '../../actions/parts';
 
+import { connect } from 'react-redux';
+import { setAuthState } from '../../actions/auth';
+
 class EditPart extends Component {
     constructor(props) {
         super(props);
@@ -18,10 +21,17 @@ class EditPart extends Component {
         partAction()
             .get(this.props.match.params.id)
             .then((data) => {
-                self.setState({ part: data.part,
-                units: data.part.units });
+                self.setState({
+                    part: data.part,
+                    units: data.part.units
+                });
             })
-            .catch((error) => { console.log(error) });
+            .catch((error) => {
+                if (error.status === 401) {
+                    this.props.dispatch(setAuthState(false));
+                }
+                Promise.resolve(error.json()).then((data) => { console.log(data.errors); this.setState({ messages: data.errors, alertClass: "alert-danger" }) });
+            });
     }
     componentWillUpdate(nextProps, nextState) {
         document.getElementById('inputName').value = nextState.part.name;
@@ -40,13 +50,13 @@ class EditPart extends Component {
     update(unit, index) {
         console.log(unit);
         let newUnits = this.state.units;
-        newUnits[index] = {name: unit};
+        newUnits[index] = { name: unit };
         this.setState({ units: newUnits });
     }
     newUnit(e) {
         e.preventDefault();
-        let newUnits = this.state.units;    
-        newUnits.push({name:""});
+        let newUnits = this.state.units;
+        newUnits.push({ name: "" });
         this.setState({ units: newUnits });
     }
     savePart() {
@@ -62,23 +72,23 @@ class EditPart extends Component {
         }
         console.log(this.state.units);
         partAction().update(part)
-        .then((success) => {
-            alert(JSON.stringify(success));
-            this.props.history.push("/");
-        })
-        .catch((error)=>{
-            console.log(error);
-        });
+            .then((success) => {
+                alert(JSON.stringify(success));
+                this.props.history.push("/");
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
-    deletePart(){
+    deletePart() {
         partAction().delete(this.props.match.params.id)
-        .then((success) => {
-            alert(JSON.stringify(success));
-            this.props.history.push("/");
-        })
-        .catch((error) => {
-            console.error(error);
-        })
+            .then((success) => {
+                alert(JSON.stringify(success));
+                this.props.history.push("/");
+            })
+            .catch((error) => {
+                console.error(error);
+            })
     }
     render() {
         return (
@@ -114,8 +124,8 @@ class EditPart extends Component {
                             <div className="form-group col-md-2">
                                 <label htmlFor="inputValue" className="col-form-label">Value (per unit)</label>
                                 <div className="input-group mb-2 mr-sm-2 mb-sm-0">
-                                <div className="input-group-addon">$</div>
-                                <input type="number" className="form-control" id="inputValue" />
+                                    <div className="input-group-addon">$</div>
+                                    <input type="number" className="form-control" id="inputValue" />
                                 </div>
                             </div>
                         </div>

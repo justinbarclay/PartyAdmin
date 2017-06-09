@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import adminActions from '../../actions/admin';
 import { Link } from 'react-router-dom';
+
+import { connect } from 'react-redux';
+import { setAuthState } from '../../actions/auth';
+
 class User extends Component {
     constructor(props) {
         super(props);
@@ -13,7 +17,13 @@ class User extends Component {
             .then((data) => {
                 self.setState({ user: data.user });
             })
-            .catch((error) => { console.log(error) });
+            .catch((error) => {
+                if (error.status === 401) {
+                    this.props.dispatch(setAuthState(false));
+                }
+                Promise.resolve(error.json()).then((data) => { console.log(data.errors); this.setState({ messages: data.errors, alertClass: "alert-danger" }) });
+
+            });
     }
     componentWillUpdate(nextProps, nextState) {
         console.log(nextState.part);

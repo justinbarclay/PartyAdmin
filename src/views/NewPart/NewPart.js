@@ -3,6 +3,9 @@ import UnitContainer from './UnitContainer';
 import partAction from '../../actions/parts';
 import Alert from '../../components/Alert';
 
+import { connect } from 'react-redux';
+import { setAuthState } from '../../actions/auth';
+
 class NewPart extends Component {
     constructor(props) {
         super(props);
@@ -52,13 +55,14 @@ class NewPart extends Component {
             units: this.state.units,
             barcode: barcode
         }
+
         partAction().save(part)
             .then((data) => {
                 this.props.history.push("/");
             })
             .catch((error) => {
-                if (error.status === 501) {
-                    this.props.history.push("/");
+                if (error.status === 401) {
+                    this.props.dispatch(setAuthState(false));
                 }
                 Promise.resolve(error.json()).then((data) => { console.log(data.errors); this.setState({ messages: data.errors, alertClass: "alert-danger" }) });
             });
@@ -113,5 +117,5 @@ class NewPart extends Component {
         );
     }
 }
-
+NewPart = connect()(NewPart);
 export default NewPart;

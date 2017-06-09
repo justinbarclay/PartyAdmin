@@ -4,6 +4,9 @@ import partAction from '../../actions/parts';
 import { Link } from 'react-router-dom'
 import Alert from '../../components/Alert';
 
+import { connect } from 'react-redux';
+import { setAuthState } from '../../actions/auth';
+
 class Part extends Component {
     constructor(props) {
         super(props);
@@ -20,7 +23,12 @@ class Part extends Component {
             .then((data) => {
                 self.setState({ part: data.part });
             })
-            .catch((error) => { console.log(error) });
+            .catch((error) => {
+                if (error.status === 401) {
+                    this.props.dispatch(setAuthState(false));
+                }
+                Promise.resolve(error.json()).then((data) => { console.log(data.errors); this.setState({ messages: data.errors, alertClass: "alert-danger" }) });
+            });
     }
     componentWillUpdate(nextProps, nextState) {
         console.log(nextState.part);
