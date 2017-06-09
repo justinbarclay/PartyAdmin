@@ -19,7 +19,7 @@ class Full extends Component {
   render() {
     return (
       <div className="app">
-        <Router>
+        
           <div>
             <Header logout={this.props.logout}/>
             <div className="app-body">
@@ -27,6 +27,7 @@ class Full extends Component {
               <main className="main pt-3">
                 <div className="container-fluid">
                   <Switch>
+
                     <Route exact path="/" name="Home" component={Dashboard} />
                     
                     <Route exact path="/parts/new" name="NewPart" component={NewPart} />
@@ -34,20 +35,21 @@ class Full extends Component {
                     <Route exact path="/parts/:id/edit" name="EditPart" component={EditPart} />
                     
                     <Route exact path="/users" name="Users" component={Users} />
-                    <Route exact path="/users/new" name="User" component={NewUser} />
+                    <Route exact path="/users/new" name="User" component={NewUser}/>
                     <Route exact path="/users/:id" name="User" component={User} />
 
                     <Route path="/signup/:token" name="Sign Up" component={SignUp} />
-                    
+
                     <Route path="*" component={_404} />
-                  </Switch>
+
+                  </Switch>              
                 </div>
               </main>
               <Aside />
             </div>
             <Footer />
           </div>
-        </Router>
+        
       </div>
     );
   }
