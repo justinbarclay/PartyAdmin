@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import adminActions from '../../actions/admin';
 import Alert from '../../components/Alert';
+import { connect } from 'react-redux';
+import {setAuthState} from '../../actions/auth';
 
 class User extends Component {
     constructor(props) {
@@ -19,14 +21,15 @@ class User extends Component {
             first_name: document.getElementById('firstName').value,
             last_name: document.getElementById('lastName').value,
         }
+        let self = this;
         adminActions().invite(user)
             .then((data) => {
                 this.props.history.push("/users");
             })
             .catch((error) => {
-                // This is a hacky way of being able to resolve an error while still reading it's body
-                if(error.status === 501){
-                    this.props.history.push("/");   
+                if(error.status === 401){
+                    this.props.dispatch(setAuthState(false));
+                    this.props.history.push("/");
                 }
                 Promise.resolve(error.json()).then((data) => { this.setState({ messages: data.errors, alertClass: "alert-danger" }) });
             });
@@ -37,6 +40,7 @@ class User extends Component {
         document.getElementById('lastName').innerText = nextState.user.last_name;
     }
     render() {
+                            console.log(this.context);
         return (
             <div className="card">
                 <div className="card-header">
@@ -66,4 +70,5 @@ class User extends Component {
     }
 }
 
+User = connect()(User)
 export default User;
