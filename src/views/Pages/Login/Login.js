@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import {setAuthState} from '../../../actions/auth'
 import 'superagent'
 
 class Login extends Component {
@@ -22,7 +24,9 @@ class Login extends Component {
       alert('Email or password can not be blank');
       return;
     }
-    loginRequest({email: email, password: password}, this.props.login);
+    loginRequest({email: email, password: password}, (success)=>{
+      this.props.dispatch(setAuthState(success));
+    });
     document.getElementById('login').disabled = true;
   }
   render() {
@@ -106,5 +110,5 @@ function loginRequest(user, callback){
       console.log('request failed', error);
     });
 }
-
+Login = connect()(Login);
 export default Login;

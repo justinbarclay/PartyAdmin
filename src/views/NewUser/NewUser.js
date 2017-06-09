@@ -21,7 +21,7 @@ class User extends Component {
             first_name: document.getElementById('firstName').value,
             last_name: document.getElementById('lastName').value,
         }
-        let self = this;
+
         adminActions().invite(user)
             .then((data) => {
                 this.props.history.push("/users");
@@ -29,7 +29,6 @@ class User extends Component {
             .catch((error) => {
                 if(error.status === 401){
                     this.props.dispatch(setAuthState(false));
-                    this.props.history.push("/");
                 }
                 Promise.resolve(error.json()).then((data) => { this.setState({ messages: data.errors, alertClass: "alert-danger" }) });
             });
