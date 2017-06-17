@@ -19,7 +19,6 @@ class App extends Component {
         );
 
         let app = this.props.auth ? signedin : signedout;
-        console.log(this.props.store.getState())
         return (
             <Provider {...this.props}>
                 {app}

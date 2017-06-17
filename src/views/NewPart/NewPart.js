@@ -27,7 +27,6 @@ class NewPart extends Component {
         this.setState({ units: newUnits });
     }
     update(unit, index) {
-        console.log(unit);
         let newUnits = this.state.units;
         newUnits[index] = unit;
         this.setState({ units: newUnits });

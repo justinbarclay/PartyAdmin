@@ -7,7 +7,7 @@ import {setAuthState} from '../../actions/auth';
 class User extends Component {
     constructor(props) {
         super(props);
-        console.log(this);
+
         this.state = {
             user: {},
             alertClass: "",
@@ -39,7 +39,6 @@ class User extends Component {
         document.getElementById('lastName').innerText = nextState.user.last_name;
     }
     render() {
-                            console.log(this.context);
         return (
             <div className="card">
                 <div className="card-header">

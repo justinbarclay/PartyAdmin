@@ -8,13 +8,13 @@ class User extends Component {
         this.signup = this.signup.bind(this);
     }
     componentWillMount() {
-        console.log(this.props.match.params.token);
+
         userActions().get(this.props.match.params.token)
             .then((data) => {
                 this.setState({ user: data.user });
             })
             .catch((error) => {
-                console.log(error);
+
             });
     }
     signup() {
@@ -39,7 +39,6 @@ class User extends Component {
         
     }
     componentWillUpdate(nextProps, nextState) {
-        console.log(nextState.user);
         document.getElementById('email').innerText += " " + nextState.user.email;
         document.getElementById('firstName').innerText += " " + nextState.user.first_name;
         document.getElementById('lastName').innerText += " " + nextState.user.last_name;

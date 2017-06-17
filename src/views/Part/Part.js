@@ -17,11 +17,10 @@ class Part extends Component {
         }
     }
     componentWillMount() {
-        let self = this;
         partAction()
             .get(this.props.match.params.id)
             .then((data) => {
-                self.setState({ part: data.part });
+                this.setState({ part: data.part });
             })
             .catch((error) => {
                 if (error.status === 401) {
@@ -31,7 +30,7 @@ class Part extends Component {
             });
     }
     componentWillUpdate(nextProps, nextState) {
-        console.log(nextState.part);
+
         document.getElementById('inputName').innerText = nextState.part.name;
         document.getElementById('inputLocation').innerText = nextState.part.room;
         document.getElementById('inputShelf').innerText = nextState.part.shelf;

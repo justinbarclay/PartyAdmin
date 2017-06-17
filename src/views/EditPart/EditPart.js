@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import UnitContainer from './UnitContainer';
 import partAction from '../../actions/parts';
 
-import { connect } from 'react-redux';
 import { setAuthState } from '../../actions/auth';
 
 class EditPart extends Component {
@@ -30,7 +29,7 @@ class EditPart extends Component {
                 if (error.status === 401) {
                     this.props.dispatch(setAuthState(false));
                 }
-                Promise.resolve(error.json()).then((data) => { console.log(data.errors); this.setState({ messages: data.errors, alertClass: "alert-danger" }) });
+                Promise.resolve(error.json()).then((data) => { this.setState({ messages: data.errors, alertClass: "alert-danger" }) });
             });
     }
     componentWillUpdate(nextProps, nextState) {
@@ -48,7 +47,6 @@ class EditPart extends Component {
         this.setState({ units: newUnits });
     }
     update(unit, index) {
-        console.log(unit);
         let newUnits = this.state.units;
         newUnits[index] = { name: unit };
         this.setState({ units: newUnits });
@@ -70,14 +68,13 @@ class EditPart extends Component {
             units: this.state.units,
             barcode: document.getElementById('inputBarcode').value
         }
-        console.log(this.state.units);
+
         partAction().update(part)
             .then((success) => {
                 alert(JSON.stringify(success));
                 this.props.history.push("/");
             })
             .catch((error) => {
-                console.log(error);
             });
     }
     deletePart() {

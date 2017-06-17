@@ -95,7 +95,6 @@ function loginRequest(user, callback){
     .then(checkStatus)
     .then(parseJSON)
     .then(function(data) {
-      console.log(data);
       if(data.jwt){
         window.localStorage.setItem('email', user.email);
         window.localStorage.setItem('jwt', data.jwt);
@@ -107,7 +106,6 @@ function loginRequest(user, callback){
     .catch(function(error) {
       document.getElementById('login').disabled = false;
       alert("username and password do not match");
-      console.log('request failed', error);
     });
 }
 Login = connect()(Login);

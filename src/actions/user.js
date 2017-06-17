@@ -49,7 +49,6 @@ let User = function () {
                 .then(parseJSON)
         },
         update: (part) => {
-            console.log(part)
             const fullpath = baseRoute + `${part.id}`
             const token = window.localStorage.getItem('jwt');
             return fetch(fullpath, {

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import adminActions from '../../actions/admin';
 import { Link } from 'react-router-dom';
 
-import { connect } from 'react-redux';
 import { setAuthState } from '../../actions/auth';
 
 class User extends Component {
@@ -26,7 +25,6 @@ class User extends Component {
             });
     }
     componentWillUpdate(nextProps, nextState) {
-        console.log(nextState.part);
         document.getElementById('email').innerText = nextState.user.email;
         document.getElementById('firstName').innerText = nextState.user.first_name;
         document.getElementById('lastName').innerText = nextState.user.last_name;
