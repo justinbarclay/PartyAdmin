@@ -13,7 +13,8 @@ function parseJSON(response) {
     return response.json()
 }
 let Part = function () {
-    let baseRoute = '//www.partyserver.dev/api/parts/'
+//    let baseRoute = '//www.partyserver.dev/api/parts/'
+let baseRoute = "//localhost:35012/api/parts/"
     return {
         save: (data) => {
             const token = window.localStorage.getItem('jwt');
