@@ -83,4 +83,4 @@ class Part extends Component {
     }
 }
 
-export default Part;
+export default connect()(Part);

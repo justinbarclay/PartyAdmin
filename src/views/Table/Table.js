@@ -10,7 +10,6 @@ class Table extends Component {
         });
         return (
             <div>
-                <SearchBar/>
                 <div className="animated fadeIn">
                     <div className="row">
                         <div className="col-sm-11">
@@ -49,24 +48,6 @@ class TableHeaders extends Component {
     }
 }
 
-class SearchBar extends Component {
-    render() {
-        return (
-            <div className="animated fadeIn">
-                <div className="row">
-                    <div className="col-sm-11">
-                        <div className="input-group">
-                            <input type="text" className="form-control" placeholder="Search for..." aria-label="Search for..." />
-                            <span className="input-group-btn">
-                                <button className="btn btn-secondary" type="button">Go!</button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-}
 class TableRow extends Component {
     constructor(props, history) {
         super(props);

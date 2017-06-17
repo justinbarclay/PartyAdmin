@@ -111,8 +111,27 @@ let Part = function () {
                 })
                 .then(checkStatus)
                 .then(parseJSON)
+        },
+        search: (data) => {
+            const fullpath = baseRoute + "search";
+            const token = window.localStorage.getItem('jwt');
+            return fetch(fullpath, {
+                    headers: new Headers({
+                        'Authorization': token,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    }),
+                    method: 'post',
+                    mode: 'cors',
+                    body: JSON.stringify({
+                        filters: data
+                    })
+                })
+                .then(checkStatus)
+                .then(parseJSON)
         }
     }
+
 }
 
 export default Part;
