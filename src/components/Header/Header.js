@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom'
-
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import {setAuthState} from '../../actions/auth'; 
 class Header extends Component {
   constructor(){
     super();
@@ -30,22 +31,22 @@ class Header extends Component {
     e.preventDefault();
 
     window.localStorage.clear();
+    this.props.dispatch(setAuthState(false));
     this.props.history.push("/");
-    this.props.logout(true);
   }
   render() {
     return (
       <header className="app-header navbar">
         <button className="navbar-toggler mobile-sidebar-toggler d-lg-none" onClick={this.mobileSidebarToggle} type="button">&#9776;</button>
-        <a className="navbar-brand" href="/"></a> 
+        <a className="navbar-brand" href="/"></a>
         <ul className="nav navbar-nav d-md-down-none mr-auto">
           <li className="nav-item">
             <a className="nav-link navbar-toggler sidebar-toggler" onClick={this.sidebarToggle} href="#">&#9776;</a>
           </li>
         </ul>
-        <ul className="nav">
+        <ul className="nav navbar-nav">
           <li className="nav-item" onClick={this.logout} >
-            <a className="nav-link nav" href="#">Logout</a>
+            <a className="nav-link" href="#">Logout</a>
           </li>
         </ul>
       </header>
@@ -53,5 +54,5 @@ class Header extends Component {
   }
 }
 
-let header =  withRouter(Header)
+let header =  withRouter(connect()(Header))
 export default header;
