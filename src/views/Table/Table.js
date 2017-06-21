@@ -38,7 +38,11 @@ class Table extends Component {
 class TableHeaders extends Component {
     render() {
         let headers = this.props.headers.map(function (header, index) {
-            return (<th key={index}>{header}</th>);
+            let styles = "";
+            if (header !== "email") {
+                styles = "tableColumn";
+            }
+            return (<th key={index} className={styles}>{header}</th>);
         });
         return (
             <tr>
@@ -59,17 +63,21 @@ class TableRow extends Component {
     render() {
         let data = this.props.data;
         let row = this.props.keys.map(function (key, index) {
+            let styles = "";
+            if (key !== "email") {
+                styles = "tableColumn";
+            }
             if (key === "updated_at") {
                 let date = data[key];
                 date = moment.default(date).format('DD/MM/YYYY');
                 return (
-                    <td key={index}>
+                    <td className={styles} key={index}>
                         {date}
                     </td>);
             }
             return (
 
-                <td key={index}>
+                <td className={styles} key={index}>
                     {data[key]}
                 </td>
             );

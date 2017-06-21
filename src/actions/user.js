@@ -1,3 +1,5 @@
+import Config from "../../config.json";
+
 function checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {
         return response
@@ -12,8 +14,7 @@ function parseJSON(response) {
     return response.json()
 }
 let User = function () {
-   // let baseRoute = '/api/';
-    let baseRoute = '//www.partyserver.dev/api/admin/';
+    let baseRoute = Config.baseRoute;
     return {
         signup: (user) => {
             const token = window.localStorage.getItem('jwt');
@@ -48,8 +49,8 @@ let User = function () {
                 .then(checkStatus)
                 .then(parseJSON)
         },
-        update: (part) => {
-            const fullpath = baseRoute + `${part.id}`
+        update: (user) => {
+            const fullpath = baseRoute + `${user.id}`
             const token = window.localStorage.getItem('jwt');
             return fetch(fullpath, {
                     headers: new Headers({
@@ -60,7 +61,7 @@ let User = function () {
                     method: 'put',
                     mode: 'cors',
                     body: JSON.stringify({
-                        part: part
+                        user: user
                     })
                 })
                 .then(checkStatus)

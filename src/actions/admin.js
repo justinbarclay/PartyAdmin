@@ -1,3 +1,5 @@
+import Config from "../../config.json";
+
 function checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {
         return response
@@ -14,12 +16,12 @@ function parseJSON(response) {
 }
 
 let Admin = function () {
-    //let baseRoute = '/api/admin/';
-    let baseRoute = '//www.partyserver.dev/api/admin/';
+    let baseRoute = Config.baseRoute + "admin/";
+    console.log(baseRoute)
     return {
         invite: (user) => {
             const token = window.localStorage.getItem('jwt');
-            const path = baseRoute + "invite"
+            const path = baseRoute + "invite/"
             return fetch(path, {
                     headers: new Headers({
                         'Authorization': token,
@@ -50,10 +52,10 @@ let Admin = function () {
                 .then(checkStatus)
                 .then(parseJSON)
         },
-        update: (part) => {
-            const fullpath = baseRoute + `${part.id}`
+        update: (user) => {
+            const path = baseRoute + `${user.id}`
             const token = window.localStorage.getItem('jwt');
-            return fetch(fullpath, {
+            return fetch(path, {
                     headers: new Headers({
                         'Authorization': token,
                         'Content-Type': 'application/json',
@@ -62,7 +64,25 @@ let Admin = function () {
                     method: 'put',
                     mode: 'cors',
                     body: JSON.stringify({
-                        part: part
+                        user: user
+                    })
+                })
+                .then(checkStatus)
+                .then(parseJSON)
+        },
+        resetPassword: (user) => {
+            const path = baseRoute + "reset_password";
+            const token = window.localStorage.getItem('jwt');
+            return fetch(path, {
+                    headers: new Headers({
+                        'Authorization': token,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    }),
+                    method: 'post',
+                    mode: 'cors',
+                    body: JSON.stringify({
+                        user: user
                     })
                 })
                 .then(checkStatus)
@@ -85,6 +105,7 @@ let Admin = function () {
         },
         index: () => {
             const path = baseRoute + 'users/';
+            console.log(path);
             const token = window.localStorage.getItem('jwt');
             return fetch(path, {
                     headers: new Headers({

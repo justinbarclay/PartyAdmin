@@ -21,7 +21,7 @@ class Table extends Component {
         let keys = Object.keys(this.state.selected);
 
         for (let i = 0; i < keys.length; i++) {
-            let key = keys[i]+""    ;
+            let key = String(keys[i]);
             if (this.state.selected[key]) {
                 selected.push(key);
             }

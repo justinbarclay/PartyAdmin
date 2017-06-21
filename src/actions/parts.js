@@ -1,3 +1,5 @@
+import Config from "../../config.json";
+
 function checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {
         return response
@@ -13,8 +15,7 @@ function parseJSON(response) {
     return response.json()
 }
 let Part = function () {
-    let baseRoute = '//www.partyserver.dev/api/parts/'
-//let baseRoute = "/api/parts/"
+    let baseRoute = Config.baseRoute + "parts/";
     return {
         save: (data) => {
             const token = window.localStorage.getItem('jwt');
