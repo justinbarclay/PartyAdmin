@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Table from '../Table';
+import Table from '../PartsTable';
 import { connect } from 'react-redux';
 import {setAuthState} from '../../actions/auth'; 
 import partAction from '../../actions/parts';
