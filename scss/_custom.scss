@@ -1,1 +1,6 @@
 // Here you can add other styles
+@media only screen and (max-width : 500px) {
+        .tableColumn{
+             display: none;
+        }
+}
