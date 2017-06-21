@@ -80,7 +80,9 @@ function parseJSON(response) {
 }
 
 function loginRequest(user, callback){
-    fetch('//www.partyserver.dev/user_token', {
+//  let route = '/user_token';
+  let route = '//www.partyserver.dev/user_token';
+    fetch(route, {
       headers: new Headers({
 		    'Content-Type': 'application/json',
         'Accept': 'application/json',

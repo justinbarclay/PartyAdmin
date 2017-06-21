@@ -37,20 +37,20 @@ class User extends Component {
                 </div>
                 <div className="container card-block">
                     <div className="form-group row">
-                        <dt htmlFor="email" className="col-sm-1">Email:</dt>
-                        <dd id="email" className="col-sm-10"></dd>
+                        <dt htmlFor="email" className="col-sm-2 text-sm-right">Email:</dt>
+                        <dd id="email" className="col-sm-8"></dd>
+                    </div>
+                    <div className="form-group row mb-1 text-sm-right">
+                        <dt className="col-sm-2 text-sm-right">First Name:</dt>
+                        <dd className="col-sm-4 text-sm-left" id="firstName"></dd>
                     </div>
                     <div className="form-group row">
-                        <dt className="col-sm-2">First Name:</dt>
-                        <dd className="col-sm-4" id="firstName"></dd>
+                        <dt className="col-sm-2 text-sm-right">Last Name:</dt>
+                        <dd className="col-sm-4 text-sm-left" id="lastName"></dd>
                     </div>
-                    <div className="form-group row">
-                        <dt className="col-sm-2">Last Name:</dt>
-                        <dd className="col-sm-4" id="lastName"></dd>
-                    </div>
-                    <div className="btn-group" role="group">
-                        <Link to={`/users/${this.props.match.params.id}/edit`} className="btn btn-primary btn-md" >Edit</Link>
-                        <Link to={`/users/${this.props.match.params.id}/edit`} className="btn btn-primary btn-md" >Reset Password</Link>
+                    <div className="btn-group row" role="group" disabled={true}>
+                        <Link to={`/users/${this.props.match.params.id}/edit`} className="btn btn-primary btn-md mr-1" >Edit</Link>
+                        <button className="btn btn-primary btn-md" >Reset Password</button>
                     </div>
                 </div>
             </div>

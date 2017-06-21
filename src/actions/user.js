@@ -12,8 +12,8 @@ function parseJSON(response) {
     return response.json()
 }
 let User = function () {
-    let baseRoute = '//www.partyserver.dev/api/';
-    //let baseRoute = '//localhost:35012/api/admin/';
+   // let baseRoute = '/api/';
+    let baseRoute = '//www.partyserver.dev/api/admin/';
     return {
         signup: (user) => {
             const token = window.localStorage.getItem('jwt');

@@ -14,8 +14,8 @@ function parseJSON(response) {
 }
 
 let Admin = function () {
+    //let baseRoute = '/api/admin/';
     let baseRoute = '//www.partyserver.dev/api/admin/';
-    //let baseRoute = '//localhost:35012/api/admin/';
     return {
         invite: (user) => {
             const token = window.localStorage.getItem('jwt');

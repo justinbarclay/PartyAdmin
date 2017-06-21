@@ -62,14 +62,16 @@ class Part extends Component {
                             <dd className="col-sm-4" id="inputShelf"></dd>
                         </div>
                         <div className="row">
-                            <dt className="col-1">Count:</dt>
-                            <dd className="col-2" id="inputCount"></dd>
-                            <dt className="col-1" title="value per unit">Value:</dt>
-                            <dd className="col-2" id="inputValue"></dd>
+                            <dt className="col-sm-1">Count:</dt>
+                            <dd className="col-sm-2" id="inputCount"></dd>
+                        </div>
+                        <div className="row">
+                            <dt className="col-sm-1" title="value per unit">Value:</dt>
+                            <dd className="col-sm-2" id="inputValue"></dd>
                         </div>
                         <div className="row mb-3">
-                            <dt className="col-1">Barcode:</dt>
-                            <dd className="col-2" id="inputBarcode" ></dd>
+                            <dt className="col-sm-1">Barcode:</dt>
+                            <dd className="col-sm-2" id="inputBarcode" ></dd>
                         </div>
                         {Units}
                         <div className="btn-group" role="group">
