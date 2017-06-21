@@ -80,7 +80,6 @@ class EditPart extends Component {
     deletePart() {
         partAction().delete(this.props.match.params.id)
             .then((success) => {
-                alert(JSON.stringify(success));
                 this.props.history.push("/");
             })
             .catch((error) => {
@@ -128,7 +127,7 @@ class EditPart extends Component {
                         </div>
                         <UnitContainer units={this.state.units} remove={this.remove} update={this.update} newUnit={this.newUnit} />
                         <div className="btn-group" role="group">
-                            <button type="button" className="btn btn-primary btn-md" onClick={this.savePart}>Save</button>
+                            <button type="button" className="btn btn-primary btn-md mr-1" onClick={this.savePart}>Save</button>
                             <button type="button" className="btn btn-danger btn-sm" onClick={this.deletePart}>Delete</button>
                         </div>
                     </form>

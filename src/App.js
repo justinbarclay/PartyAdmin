@@ -15,14 +15,17 @@ class App extends Component {
         );
 
         let signedin = (
-            <Full store={this.props.store} />
+            <Full store={this.props.store}/>
         );
 
         let app = this.props.auth ? signedin : signedout;
         return (
+            <div>
             <Provider {...this.props}>
                 {app}
-            </Provider>);
+            </Provider>
+            <div id="print-mount"></div> 
+            </div>);
     }
 }
 

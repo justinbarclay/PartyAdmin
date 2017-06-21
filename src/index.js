@@ -11,10 +11,10 @@ let Wrapper = () => {
   return (
     <Router>
     <App store={store}/>
-      </Router>
+    </Router>
   )
 }
 ReactDOM.render(
-  <Wrapper/>, document.getElementById('root')
+  <Wrapper />, document.getElementById('root')
 );
 

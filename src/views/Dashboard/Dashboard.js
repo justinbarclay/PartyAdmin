@@ -3,13 +3,14 @@ import Table from '../Table';
 import { connect } from 'react-redux';
 import {setAuthState} from '../../actions/auth'; 
 import partAction from '../../actions/parts';
+import QRCodePrinter from '../QRCodePrinter';
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.rowOnClick = this.rowOnClick.bind(this);
     this.searchFor = this.searchFor.bind(this);
-    this.state = { headers: ["Name", "Count", "Room", "Shelf", "Updated"], parts: [], keys: ["name", "count", "room", "shelf", "updated_at"] }
+    this.state = { headers: [" ", "Name", "Count", "Room", "Shelf", "Updated"], parts: [], keys: ["name", "count", "room", "shelf", "updated_at"] }
   }
   componentWillMount() {
     partAction()

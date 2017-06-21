@@ -17,7 +17,7 @@ import Footer from '../../components/Footer/';
 class Full extends Component {
   render() {
     return (
-      <div className="app">
+      <div className="app" id="react-no-print">
         
           <div>
             <Header logout={this.props.logout}/>
