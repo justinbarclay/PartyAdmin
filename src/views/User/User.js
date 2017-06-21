@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import adminActions from '../../actions/admin';
+import Alert from '../../components/Alert';
 import { Link } from 'react-router-dom';
 
 import { setAuthState } from '../../actions/auth';
@@ -7,7 +8,13 @@ import { setAuthState } from '../../actions/auth';
 class User extends Component {
     constructor(props) {
         super(props);
-        this.state = { user: {} }
+        this.state = {
+            user: {},
+            alertClass: "",
+            messages: []
+        }
+
+        this.resetPassword = this.resetPassword.bind(this);
     }
     componentWillMount() {
         let self = this;
@@ -29,12 +36,27 @@ class User extends Component {
         document.getElementById('firstName').innerText = nextState.user.first_name;
         document.getElementById('lastName').innerText = nextState.user.last_name;
     }
+    resetPassword() {
+        adminActions()
+            .resetPassword(this.state.user)
+            .then((data) => {
+                this.setState({ messages: ["User has been set a password reset email"], alertClass: "alert-success" })
+            })
+            .catch((error) => {
+                if (error.status === 401) {
+                    this.props.dispatch(setAuthState(false));
+                }
+                Promise.resolve(error.json()).then((data) => { console.log(data.errors); this.setState({ messages: data.errors, alertClass: "alert-danger" }) });
+
+            });
+    }
     render() {
         return (
             <div className="card">
                 <div className="card-header">
                     Part
                 </div>
+                <Alert alertClass={this.state.alertClass} messages={this.state.messages} />
                 <div className="container card-block">
                     <div className="form-group row">
                         <dt htmlFor="email" className="col-sm-2 text-sm-right">Email:</dt>
@@ -50,7 +72,7 @@ class User extends Component {
                     </div>
                     <div className="btn-group row" role="group" disabled={true}>
                         <Link to={`/users/${this.props.match.params.id}/edit`} className="btn btn-primary btn-md mr-1" >Edit</Link>
-                        <button className="btn btn-primary btn-md" >Reset Password</button>
+                        <button className="btn btn-primary btn-md" onClick={this.resetPassword} >Reset Password</button>
                     </div>
                 </div>
             </div>

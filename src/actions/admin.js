@@ -17,7 +17,6 @@ function parseJSON(response) {
 
 let Admin = function () {
     let baseRoute = Config.baseRoute + "admin/";
-    console.log(baseRoute)
     return {
         invite: (user) => {
             const token = window.localStorage.getItem('jwt');
