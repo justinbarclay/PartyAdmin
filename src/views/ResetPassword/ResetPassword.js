@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Alert from '../../components/Alert';
 import userActions from '../../actions/user';
 
-class User extends Component {
+class ResetPassword extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -10,7 +10,7 @@ class User extends Component {
             alertClass: "",
             messages: []
         }
-        this.signup = this.signup.bind(this);
+        this.resetPassword = this.resetPassword.bind(this);
     }
     componentWillMount() {
 
@@ -22,52 +22,41 @@ class User extends Component {
 
             });
     }
-    signup() {
+    resetPassword() {
         let password = document.getElementById('password').value;
         let confirmation = document.getElementById('confirmation').value;
         if (password === confirmation && password.length > 6) {
             let user = {
                 password: password,
                 password_confirmation: confirmation,
-                invite_token: this.props.match.params.token
+                reset_token: this.props.match.params.token
             }
             userActions().signup(user)
                 .then((data) => {
-                    alert(JSON.stringify(data))
+                    this.setState({ messages: ["Password was reset"], alertClass: "alert-success" });
                 })
                 .catch((error) => {
                     Promise.resolve(error.json()).then((data) => { console.log(data.errors); this.setState({ messages: data.errors, alertClass: "alert-danger" }) });
                 });
         } else {
-            this.setState({ messages: ["Passwords do not match"], alertClass: "alert-danger" });
+            this.setState({messages: ["Passwords do not match"], alertClass: "alert-danger"});
         }
 
     }
     componentWillUpdate(nextProps, nextState) {
-        document.getElementById('email1').innerText = nextState.user.email;
-        document.getElementById('firstName').innerText += " " + nextState.user.first_name;
-        document.getElementById('lastName').innerText += " " + nextState.user.last_name;
+        document.getElementById('email').innerText += " " + nextState.user.email;
     }
     render() {
         return (
             <div className="container">
                 <div className="card">
                     <div className="card-header">
-                        Sign Up
+                        Reset Password
                     </div>
                     <Alert alertClass={this.state.alertClass} messages={this.state.messages} />
                     <div className="card-block">
-                        <div className="form-group">
-                            <label htmlFor="email">Email: </label>
-                            <dd id="email1"> </dd>
-                        </div>
-                        <div className="form-group">
-                            <label>First Name: </label>
-                            <dd id="firstName"></dd>
-                        </div>
-                        <div className="form-group ">
-                            <label>Last Name: </label>
-                            <dd id="lastName"></dd>
+                        <div className="form-group row">
+                            <dd className="col-md-4" id="email">Email: </dd>
                         </div>
                         <div className="form-group row">
                             <label className="col-md-1">Password:</label>
@@ -85,4 +74,4 @@ class User extends Component {
     }
 }
 
-export default User;
+export default ResetPassword;
