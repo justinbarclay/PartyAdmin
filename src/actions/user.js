@@ -4,9 +4,10 @@ function checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {
         return response
     } else {
-        var error = new Error(response.statusText)
-        error.response = response
-        throw error
+        if (response.status === 401) {
+            window.localStorage.clear();
+        }
+        return Promise.reject(response);
     }
 }
 
@@ -45,6 +46,24 @@ let User = function () {
                     }),
                     method: 'GET',
                     mode: 'cors',
+                })
+                .then(checkStatus)
+                .then(parseJSON)
+        },
+        resetPassword: (user) => {
+            const path = baseRoute + "reset_password";
+            const token = window.localStorage.getItem('jwt');
+            return fetch(path, {
+                    headers: new Headers({
+                        'Authorization': token,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    }),
+                    method: 'post',
+                    mode: 'cors',
+                    body: JSON.stringify({
+                        user: user
+                    })
                 })
                 .then(checkStatus)
                 .then(parseJSON)
