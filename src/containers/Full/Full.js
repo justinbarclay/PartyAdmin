@@ -28,19 +28,19 @@ class Full extends Component {
                 <div className="container-fluid">
                   <Switch>
 
-                    <ProtectedRoute exact path="/" name="Home" component={Dashboard} />
+                    <Route exact path="/" name="Home" component={Dashboard} />
                     
-                    <ProtectedRoute exact path="/parts/new" name="NewPart" component={NewPart} />
-                    <ProtectedRoute exact path="/parts/:id" name="Part" component={Part} />
-                    <ProtectedRoute exact path="/parts/:id/edit" name="EditPart" component={EditPart} />
+                    <Route exact path="/parts/new" name="NewPart" component={NewPart} />
+                    <Route exact path="/parts/:id" name="Part" component={Part} />
+                    <Route exact path="/parts/:id/edit" name="EditPart" component={EditPart} />
                     
-                    <ProtectedRoute exact path="/users" name="Users" component={Users} />
-                    <ProtectedRoute exact path="/users/new" name="User" component={NewUser}/>
-                    <ProtectedRoute exact path="/users/:id" name="User" component={User} />
+                    <Route exact path="/users" name="Users" component={Users} />
+                    <Route exact path="/users/new" name="User" component={NewUser}/>
+                    <Route exact path="/users/:id" name="User" component={User} />
 
-                    <ProtectedRoute path="/signup/:token" name="Sign Up" component={SignUp} />
+                    <Route path="/signup/:token" name="Sign Up" component={SignUp} />
 
-                    <ProtectedRoute path="*" component={_404} />
+                    <Route path="*" component={_404} />
 
                   </Switch>              
                 </div>

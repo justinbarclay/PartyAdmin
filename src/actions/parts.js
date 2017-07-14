@@ -22,9 +22,7 @@ let Part = function () {
             let units = []
             data.units.forEach(function (element) {
                 units.push({
-                    unit_attributes: {
                         name: element
-                    }
                 })
             }, this);
 
@@ -35,7 +33,7 @@ let Part = function () {
                 shelf: data.shelf,
                 value: data.value,
                 barcode: data.bardcode,
-                unit_parts_attributes: units
+                units: units
             }
             return fetch(baseRoute, {
                     headers: new Headers({
