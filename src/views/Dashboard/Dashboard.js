@@ -45,15 +45,18 @@ class Dashboard extends Component {
   keyUp(e){
     e.preventDefault();
   }
+  hideOptions(){
+    console.log(document.getElementById('options'))
+    document.getElementById('options').className = "form-group collapse"
+  }
   render() {
     return (
       <div>
-        <SearchBar handleClick={this.searchFor} />
-        <div>
-          <fieldset className="form-group">
+        <SearchBar handleClick={this.searchFor}>
+          <fieldset data-toggle="true" className="form-group collapse" aria-expanded="false" id="options" onBlur={this.hideOptions}>
             <div className="form-check">
               <label className="form-check-label">
-                <input type="radio" className="form-check-input" name="optionsRadios" id="optionRadio" value="part" default={true}/>
+                <input type="radio" className="form-check-input" name="optionsRadios" id="optionPart" defaultChecked={true} value="part" default={true}/>
                 By Part
             </label>
             </div>
@@ -64,7 +67,7 @@ class Dashboard extends Component {
           </label>
             </div>
           </fieldset>
-        </div>
+        </SearchBar>
         <Table header={this.state.headers} data={this.state.parts} keys={this.state.keys} title={"Part"} onKeyUp={this.keyUp} handleClick={this.rowOnClick} baseRoute={"parts"} />
       </div>
     );
@@ -82,19 +85,25 @@ class SearchBar extends Component {
     let data = document.getElementById("search").value
     this.props.handleClick(data)
   }
+  showOptions(){
+    console.log(document.getElementById('options'))
+    document.getElementById('options').className = "form-group collapse.show"
+  }
+  
   render() {
     return (
-      <div className="animated fadeIn">
+      <div className="animated fadeIn" onFocus={this.showOptions}>
         <div className="row">
           <div className="col-sm-11">
             <div className="input-group">
-              <input type="text" className="form-control" id="search" placeholder="Search for..." aria-label="Search for..." />
+              <input type="text" className="form-control" id="search" placeholder="Search for..." aria-label="Search for..."/>
               <span className="input-group-btn">
                 <button className="btn btn-secondary" onClick={this.handleClick} type="button">Go!</button>
               </span>
             </div>
           </div>
         </div>
+        {this.props.children}
       </div>
     );
   }
