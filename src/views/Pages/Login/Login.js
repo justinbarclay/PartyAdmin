@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { Route, Redirect } from 'react-router-dom';
 import {connect} from 'react-redux';
 import {setAuthState} from '../../../actions/auth'
+import Config from "../../../../config.json";
 import 'superagent'
 
 class Login extends Component {
@@ -81,7 +83,7 @@ function parseJSON(response) {
 
 function loginRequest(user, callback){
 //  let route = '/user_token';
-  let route = '//www.partyserver.dev/user_token';
+  let route = 'user_token';
     fetch(route, {
       headers: new Headers({
 		    'Content-Type': 'application/json',
@@ -104,10 +106,12 @@ function loginRequest(user, callback){
       } else {
         throw new Error("Response missing JWT")
       }
+      callback(true);
     })
     .catch(function(error) {
       document.getElementById('login').disabled = false;
       alert("username and password do not match");
+      callback(false);
     });
 }
 Login = connect()(Login);
