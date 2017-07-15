@@ -29,8 +29,6 @@ class Table extends Component {
 
 
         QRCodePrinter(selected);
-        window.print();
-        QRCodePrinter([]);
     }
     render() {
         let handleClick = this.props.handleClick;

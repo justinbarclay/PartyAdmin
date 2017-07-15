@@ -5,9 +5,15 @@ import ReactDOM from 'react-dom';
 import { QRCode } from 'react-qr-svg';
 
 class QRCodePrinter extends React.Component {
+  componentDidMount(){
+    window.print();
+  }
+  componentDidUpdate(){
+    window.print();
+  }
   render() {
     let qrCodes = this.props.partIDs.map((value, index) =>{
-      return <div key={index} className="m-2 d-inline-block"><QRCode value={value+""} size={305} /></div>;
+      return <div key={index} className="m-2 d-inline-block"><QRCode value={value.toString()} size={305} /></div>;
     })
     return (
           <PrintTemplate>

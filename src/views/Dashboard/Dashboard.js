@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Table from '../PartsTable';
 import { connect } from 'react-redux';
-import {setAuthState} from '../../actions/auth'; 
+import { setAuthState } from '../../actions/auth';
 import partAction from '../../actions/parts';
-import QRCodePrinter from '../QRCodePrinter';
+//import QRCodePrinter from '../QRCodePrinter';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -14,14 +14,14 @@ class Dashboard extends Component {
   }
   componentWillMount() {
     partAction()
-    .index()
-    .then((data) => {
-      const parts = data.parts;
-      this.setState({ parts: parts });
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+      .index()
+      .then((data) => {
+        const parts = data.parts;
+        this.setState({ parts: parts });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
   rowOnClick(id) {
     this.props.history.push(`/parts/${id}`);
@@ -29,23 +29,23 @@ class Dashboard extends Component {
   searchFor(term) {
     let type = "part";
     let typeSelector = document.querySelector('input[name="optionsRadios"]:checked');
-    if( typeSelector !== null){
+    if (typeSelector !== null) {
       type = typeSelector.value;
     }
     partAction().search({ query_term: term, type: type })
-    .then((data) => {
-      this.setState({parts: data.parts});
-    })
-    .catch((error) => {
-      if(error.status === 401){
-            this.props.dispatch(setAuthState(false));
-      }
-    });
+      .then((data) => {
+        this.setState({ parts: data.parts });
+      })
+      .catch((error) => {
+        if (error.status === 401) {
+          this.props.dispatch(setAuthState(false));
+        }
+      });
   }
-  keyUp(e){
+  keyUp(e) {
     e.preventDefault();
   }
-  hideOptions(){
+  hideOptions() {
     console.log(document.getElementById('options'))
     document.getElementById('options').className = "form-group collapse"
   }
@@ -56,7 +56,7 @@ class Dashboard extends Component {
           <fieldset data-toggle="true" className="form-group collapse" aria-expanded="false" id="options" onBlur={this.hideOptions}>
             <div className="form-check">
               <label className="form-check-label">
-                <input type="radio" className="form-check-input" name="optionsRadios" id="optionPart" defaultChecked={true} value="part" default={true}/>
+                <input type="radio" className="form-check-input" name="optionsRadios" id="optionPart" defaultChecked={true} value="part" default={true} />
                 By Part
             </label>
             </div>
@@ -74,29 +74,27 @@ class Dashboard extends Component {
   }
 }
 
-
-
 class SearchBar extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
   }
-  handleClick(){
+  handleClick() {
     let data = document.getElementById("search").value
     this.props.handleClick(data)
   }
-  showOptions(){
+  showOptions() {
     console.log(document.getElementById('options'))
     document.getElementById('options').className = "form-group collapse.show"
   }
-  
+
   render() {
     return (
       <div className="animated fadeIn" onFocus={this.showOptions}>
         <div className="row">
           <div className="col-sm-11">
             <div className="input-group">
-              <input type="text" className="form-control" id="search" placeholder="Search for..." aria-label="Search for..."/>
+              <input type="text" className="form-control" id="search" placeholder="Search for..." aria-label="Search for..." />
               <span className="input-group-btn">
                 <button className="btn btn-secondary" onClick={this.handleClick} type="button">Go!</button>
               </span>

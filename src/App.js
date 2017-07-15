@@ -21,10 +21,10 @@ class App extends Component {
         let app = this.props.auth ? signedin : signedout;
         return (
             <div>
-            <Provider {...this.props}>
-                {app}
-            </Provider>
-            <div id="print-mount"></div> 
+                <Provider {...this.props}>
+                    {app}
+                </Provider>
+                <div id="print-mount"></div> 
             </div>);
     }
 }
