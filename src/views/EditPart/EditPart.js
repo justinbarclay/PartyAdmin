@@ -71,7 +71,6 @@ class EditPart extends Component {
 
         partAction().update(part)
             .then((success) => {
-                alert(JSON.stringify(success));
                 this.props.history.push("/");
             })
             .catch((error) => {

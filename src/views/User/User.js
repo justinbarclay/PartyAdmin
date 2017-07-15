@@ -27,7 +27,7 @@ class User extends Component {
                 if (error.status === 401) {
                     this.props.dispatch(setAuthState(false));
                 }
-                Promise.resolve(error.json()).then((data) => { console.log(data.errors); this.setState({ messages: data.errors, alertClass: "alert-danger" }) });
+                Promise.resolve(error.json()).then((data) => { this.setState({ messages: data.errors, alertClass: "alert-danger" }) });
 
             });
     }

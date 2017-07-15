@@ -29,7 +29,6 @@ class Register extends Component {
                   <span className="input-group-addon"><i className="icon-lock"></i></span>
                   <input type="password" className="form-control" placeholder="Repeat password"/>
                 </div>
-
                 <button type="button" className="btn btn-block btn-success">Create Account</button>
               </div>
             </div>

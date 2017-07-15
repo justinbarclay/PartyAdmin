@@ -33,10 +33,10 @@ class User extends Component {
             }
             userActions().signup(user)
                 .then((data) => {
-                    alert(JSON.stringify(data))
+                    this.props.history.push("/");
                 })
                 .catch((error) => {
-                    Promise.resolve(error.json()).then((data) => { console.log(data.errors); this.setState({ messages: data.errors, alertClass: "alert-danger" }) });
+                    Promise.resolve(error.json()).then((data) => { this.setState({ messages: data.errors, alertClass: "alert-danger" }) });
                 });
         } else {
             this.setState({ messages: ["Passwords do not match"], alertClass: "alert-danger" });
