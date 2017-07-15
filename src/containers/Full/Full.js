@@ -13,7 +13,6 @@ import _404 from '../../views/Pages/Page404/';
 import Sidebar from '../../components/Sidebar/';
 import Aside from '../../components/Aside/';
 import Footer from '../../components/Footer/';
-import ProtectedRoute from '../../components/ProtectedRoute/';
 
 class Full extends Component {
   render() {
